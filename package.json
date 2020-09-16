@@ -1,0 +1,40 @@
+{
+  "name": "@i/azure",
+  "version": "0.0.7",
+  "description": "Azure DevOps API integration for the Intouch Design System",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://intazdoweb.intouchsol.com/IntouchDesignSystem/IntouchDesignSystem/_git/azure",
+  "author": "Intouch Group",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist && npm run typegen",
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "prepare": "npm run build",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false --strict --jsx react",
+    "typegen": "tsc",
+    "test": "echo tests are missing"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.11.2",
+    "@i/utility": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.1",
+    "@babel/plugin-transform-runtime": "7.11.0",
+    "@babel/preset-env": "7.11.0",
+    "@babel/preset-typescript": "7.10.4",
+    "@rollup/plugin-babel": "5.1.0",
+    "@rollup/plugin-node-resolve": "8.4.0",
+    "@types/node": "14.0.27",
+    "rimraf": "3.0.2",
+    "rollup": "2.23.1",
+    "rollup-plugin-terser": "6.1.0",
+    "rollup-plugin-size-snapshot": "0.12.0",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.7"
+  },
+  "peerDependencies": {}
+}
