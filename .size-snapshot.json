@@ -1,6 +1,6 @@
 {
   "index.esm.js": {
-    "bundled": 1457,
+    "bundled": 1465,
     "minified": 1457,
     "gzipped": 741,
     "treeshaked": {
@@ -14,7 +14,7 @@
     }
   },
   "index.cjs.js": {
-    "bundled": 1519,
+    "bundled": 1527,
     "minified": 1519,
     "gzipped": 780
   }
