@@ -121,10 +121,17 @@ export class AzureUserConnection {
 
             for (const organizationChunk of organizationChunks) {
                 await Promise.all(organizationChunk.map(async ({ name, apiUrl }) => {
-                    this.gitRepos.push([
-                        name,
-                        (await this.azureRequest(apiUrl + GIT_ENDPOINT)).value || [],
-                    ])
+                    let value = []
+
+                    try {
+                        const response = await this.azureRequest(apiUrl + GIT_ENDPOINT)
+                        value = response.value || []
+                    }
+                    catch (error) {
+                        console.error(error)
+                    }
+
+                    this.gitRepos.push([ name, value ])
                 }))
             }
 
