@@ -47,7 +47,7 @@ export class AzureUserConnection {
     authHeaders: { Authorization: string, 'Content-Type': string, 'User-Agent': string }
     concurrency: number
     organizations: AzureOrganizationData[]
-    gitRepos: [ string, AzureGitRepo[] ][]
+    gitRepos: { [organizationName: string]: AzureGitRepo[] }
     lastOrganizationSync: Date | null
     lastGitRepoSync: Date | null
 
@@ -70,7 +70,7 @@ export class AzureUserConnection {
         }
         this.concurrency = concurrency
         this.organizations = []
-        this.gitRepos = []
+        this.gitRepos = {}
         this.lastOrganizationSync = null
         this.lastGitRepoSync = null
     }
@@ -120,18 +120,18 @@ export class AzureUserConnection {
             const organizationChunks = chunk(this.organizations, this.concurrency)
 
             for (const organizationChunk of organizationChunks) {
-                await Promise.all(organizationChunk.map(async ({ name, apiUrl }) => {
-                    let value = []
+                await Promise.all(organizationChunk.map(async ({ name: organizationName, apiUrl }) => {
+                    let repos = []
 
                     try {
                         const response = await this.azureRequest(apiUrl + GIT_ENDPOINT)
-                        value = response.value || []
+                        repos = response.value || []
                     }
                     catch (error) {
                         console.error(error)
                     }
 
-                    this.gitRepos.push([ name, value ])
+                    this.gitRepos[organizationName] = repos
                 }))
             }
 
