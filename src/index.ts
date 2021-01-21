@@ -92,6 +92,7 @@ export class AzureUserConnection {
 
     async getOrganizations () {
         try {
+            this.organizations = []
             const organizationsResponse = await this.azureRequest(this.instanceUrl + ORGANIZATIONS_ENDPOINT)
             const organizationsData = (organizationsResponse.value || []) as AzureOrganization[]
 
@@ -117,6 +118,7 @@ export class AzureUserConnection {
                 await this.getOrganizations()
             }
 
+            this.gitRepos = []
             const organizationChunks = chunk(this.organizations, this.concurrency)
 
             for (const organizationChunk of organizationChunks) {
