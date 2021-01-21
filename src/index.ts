@@ -50,6 +50,7 @@ export class AzureUserConnection {
     gitRepos: [ AzureOrganization['name'], AzureGitRepo[] ][]
     lastOrganizationSync: Date | null
     lastGitRepoSync: Date | null
+    isFetching: boolean // Whether we are currently fetching organizations or git repos
 
     constructor ({
         instanceUrl,
@@ -73,6 +74,7 @@ export class AzureUserConnection {
         this.gitRepos = []
         this.lastOrganizationSync = null
         this.lastGitRepoSync = null
+        this.isFetching = false
     }
 
     async azureRequest (url: string): Promise<any> {
@@ -92,7 +94,13 @@ export class AzureUserConnection {
 
     async getOrganizations () {
         try {
+            if (this.isFetching) {
+                console.error('@i/azure attempted to getOrganizations while fetching was already in progress')
+                return
+            }
+
             this.organizations = []
+            this.isFetching = true
             const organizationsResponse = await this.azureRequest(this.instanceUrl + ORGANIZATIONS_ENDPOINT)
             const organizationsData = (organizationsResponse.value || []) as AzureOrganization[]
 
@@ -105,20 +113,28 @@ export class AzureUserConnection {
 
             this.lastOrganizationSync = new Date()
 
+            this.isFetching = false
             return this.organizations
         }
         catch (error) {
+            this.isFetching = false
             throw error
         }
     }
 
     async getGitRepos () {
         try {
+            if (this.isFetching) {
+                console.error('@i/azure attempted to getGitRepos while fetching was already in progress')
+                return
+            }
+
             if (this.organizations.length === 0) {
                 await this.getOrganizations()
             }
 
             this.gitRepos = []
+            this.isFetching = true
             const organizationChunks = chunk(this.organizations, this.concurrency)
 
             for (const organizationChunk of organizationChunks) {
@@ -138,10 +154,12 @@ export class AzureUserConnection {
             }
 
             this.lastGitRepoSync = new Date()
+            this.isFetching = false
 
             return this.gitRepos
         }
         catch (error) {
+            this.isFetching = false
             throw error
         }
     }
