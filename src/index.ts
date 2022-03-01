@@ -1,4 +1,4 @@
-import { chunk } from '@i/utility'
+import { chunk } from '@intouchg/utility'
 
 // This is also called a "Project Collection"
 // in Azure DevOps Server 2019
@@ -95,7 +95,7 @@ export class AzureUserConnection {
     async getOrganizations () {
         try {
             if (this.isFetching) {
-                console.error('@i/azure attempted to getOrganizations while fetching was already in progress')
+                console.error('@intouchg/azure attempted to getOrganizations while fetching was already in progress')
                 return
             }
 
@@ -125,7 +125,7 @@ export class AzureUserConnection {
     async getGitRepos () {
         try {
             if (this.isFetching) {
-                console.error('@i/azure attempted to getGitRepos while fetching was already in progress')
+                console.error('@intouchg/azure attempted to getGitRepos while fetching was already in progress')
                 return
             }
 

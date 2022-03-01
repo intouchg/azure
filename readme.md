@@ -1,4 +1,4 @@
-# @i/azure
+# @intouchg/azure
 
 Azure DevOps API integration for the Intouch Design System
 <br>

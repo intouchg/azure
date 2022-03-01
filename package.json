@@ -1,11 +1,11 @@
 {
-  "name": "@i/azure",
-  "version": "0.0.17",
+  "name": "@intouchg/azure",
+  "version": "0.1.0",
   "description": "Azure DevOps API integration for the Intouch Design System",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "repository": "https://intazdoweb.intouchsol.com/IntouchDesignSystem/IntouchDesignSystem/_git/azure",
+  "repository": "https://github.com/intouchg/azure",
   "author": "Intouch Group",
   "license": "UNLICENSED",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@i/utility": "latest"
+    "@intouchg/utility": "latest"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
