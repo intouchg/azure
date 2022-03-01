@@ -1,13 +1,13 @@
 {
   "name": "@intouchg/azure",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Azure DevOps API integration for the Intouch Design System",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/intouchg/azure",
   "author": "Intouch Group",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist && npm run typegen",
     "build": "rollup -c",
