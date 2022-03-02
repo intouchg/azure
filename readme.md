@@ -10,7 +10,7 @@ Azure DevOps API integration for the Intouch Design System
 This module currently exports a single class `AzureUserConnection`:
 
 ```js
-import { AzureUserConnection } from '@i/azure'
+import { AzureUserConnection } from '@intouchg/azure'
 
 // AzureUserConnection constructor takes an options object which contains
 // the Azure DevOps instance URL, a username, a Personal Access Token, and
